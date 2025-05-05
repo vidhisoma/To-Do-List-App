@@ -1,0 +1,64 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .todo-container {
+            width: 300px;
+            margin: auto;
+            padding: 20px;
+            background: rgb(245, 157, 157);
+            border-radius: 10px;
+            text-align: center;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+        li {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 5px;
+            background: white;
+            margin-top: 5px;
+            border-radius: 5px;
+        }
+        .delete-btn {
+            background: red;
+            color: white;
+            border: none;
+            cursor: pointer;
+            padding: 3px 6px;
+        }
+    </style>
+</head>
+<body>
+    <div class="todo-container">
+        <h1 style="color: rgb(204, 192, 255);">TO-DO LIST</h1>
+        <input type="text" id="taskInput" placeholder="Enter a task">
+        <input type="date" id="taskDate">
+        <button id="addTask" style="background-color: blue;">ADD</button>
+        <ul id="taskList"></ul>
+    </div>
+    <script>
+        document.getElementById("addTask").addEventListener("click", function() {
+            let taskValue = document.getElementById("taskInput").value;
+            let taskDate = document.getElementById("taskDate").value;
+            if(taskValue !== "") {
+                let li = document.createElement("li");
+                li.innerHTML = `${taskValue} - <strong>${taskDate}</strong> <button class='delete-btn'>X</button>`;
+                document.getElementById("taskList").appendChild(li);
+                document.getElementById("taskInput").value = "";
+                document.getElementById("taskDate").value = "";
+                
+                li.querySelector(".delete-btn").addEventListener("click", function() {
+                    li.remove();
+                });
+            }
+        });
+    </script>
+</body>
+</html>
